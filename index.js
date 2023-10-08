@@ -8,43 +8,28 @@ function playRound (playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
 
-    switch (playerSelection) {
-        case "Rock":
-            if (computerSelection === "Rock") {
-                alert("Draw!");
-                return [0, 0];
-            } else if (computerSelection === "Paper") {
-                alert("You Win! " + playerSelection + " beats " + computerSelection);
-                return [1, 0];
-            } else {
+    if (!(playerSelection === "Rock" || playerSelection === "Paper" || playerSelection === "Scissors")) {
+        alert("Invalid Input");
+        return [0, 0];
+    } else {
+        if (
+            (playerSelection === "Rock" && computerSelection === "Paper") ||  
+            (playerSelection === "Paper" && computerSelection === "Scissors") ||
+            (playerSelection === "Scissors" && computerSelection === "Rock")
+           ) {
                 alert("You Lose! " + computerSelection + " beats " + playerSelection);
                 return [0, 1];
-            }
-        case "Paper":
-            if (computerSelection === "Paper") {
-                alert("Draw!");
-                return [0, 0];
-            } else if (computerSelection === "Rock") {
-                alert("You Lose! " + computerSelection + " beats " + playerSelection);
-                return [0, 1];
-            } else {
+        } else if (
+            (playerSelection === "Rock" && computerSelection === "Scissors") ||  
+            (playerSelection === "Scissors" && computerSelection === "Paper") ||
+            (playerSelection === "Paper" && computerSelection === "Rock")
+        ) {
                 alert("You Win! " + playerSelection + " beats " + computerSelection);
                 return [1, 0];
-            }
-        case "Scissors":
-            if (computerSelection === "Scissors") {
-                alert("Draw!");
-                return [0, 0];
-            } else if (computerSelection === "Rock") {
-                alert("You Win! " + playerSelection + " beats " + computerSelection);
-                return [1, 0];
-            } else {
-                alert("You Lose! " + computerSelection + " beats " + playerSelection);
-                return [0, 1];
-            }
-        default:
-            alert("Invalid Input");
+        } else {
+            alert("Draw! " + playerSelection + " ties with " + computerSelection);
             return [0, 0];
+        }
     }
 }
 
