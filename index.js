@@ -5,31 +5,34 @@ function getComputerChoice () {
 }
 
 function playRound (playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
+    const resultContainer = document.querySelector('.result-container');
+    const result = document.querySelector('#result');
+    if (result) {
+        result.remove();
+    }
+    const resultText = document.createElement('h2');
+    resultText.id = "result";
 
-    if (!(playerSelection === "Rock" || playerSelection === "Paper" || playerSelection === "Scissors")) {
-        alert("Invalid Input");
-        return [0, 0];
-    } else {
-        if (
-            (playerSelection === "Rock" && computerSelection === "Paper") ||  
-            (playerSelection === "Paper" && computerSelection === "Scissors") ||
-            (playerSelection === "Scissors" && computerSelection === "Rock")
-           ) {
-                alert("You Lose! " + computerSelection + " beats " + playerSelection);
-                return [0, 1];
-        } else if (
-            (playerSelection === "Rock" && computerSelection === "Scissors") ||  
-            (playerSelection === "Scissors" && computerSelection === "Paper") ||
-            (playerSelection === "Paper" && computerSelection === "Rock")
+    if (
+        (playerSelection === "Rock" && computerSelection === "Paper") ||  
+        (playerSelection === "Paper" && computerSelection === "Scissors") ||
+        (playerSelection === "Scissors" && computerSelection === "Rock")
         ) {
-                alert("You Win! " + playerSelection + " beats " + computerSelection);
-                return [1, 0];
-        } else {
-            alert("Draw! " + playerSelection + " ties with " + computerSelection);
-            return [0, 0];
-        }
+            resultText.textContent = "You Lose! " + computerSelection + " beats " + playerSelection;
+            resultContainer.appendChild(resultText);
+            return [0, 1];
+    } else if (
+        (playerSelection === "Rock" && computerSelection === "Scissors") ||  
+        (playerSelection === "Scissors" && computerSelection === "Paper") ||
+        (playerSelection === "Paper" && computerSelection === "Rock")
+    ) {
+            resultText.textContent = "You Win! " + playerSelection + " beats " + computerSelection;
+            resultContainer.appendChild(resultText);
+            return [1, 0];
+    } else {
+        resultText.textContent = "Draw! " + playerSelection + " ties with " + computerSelection;
+        resultContainer.appendChild(resultText);
+        return [0, 0];
     }
 }
 
@@ -37,27 +40,31 @@ function game () {
     let score = [];
     let wins = 0;
     let losses = 0;
-    let i = 1;
-    while (i < 6) {
-        const playerSelection = prompt("Choose: Rock, Paper or Scissors?");
-        const computerSelection = getComputerChoice();
-        score = playRound(playerSelection, computerSelection); 
-        wins += score[0];
-        losses += score[1]; 
-        alert("Wins: " + wins + "\nLosses: " + losses);
+    const buttons = document.querySelectorAll('button');
 
-        if (i == 5) {
-            if (wins > losses) {
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const computerSelection = getComputerChoice();
+            const playerSelection = button.id;
+            score = playRound(playerSelection, computerSelection); 
+            wins += score[0];
+            losses += score[1]; 
+            alert("Wins: " + wins + "\nLosses: " + losses);
+
+            if (wins == 5) {
                 alert("Congratulations! You are the winner!");
-            } else if (wins == losses) {
-                alert("It's a draw!");
-            } else {
-                alert("Better luck next time!");
+                score = [];
+                wins = 0;
+                losses = 0;
             }
-        }
-
-        i++;
-    }
+            if (losses == 5) {
+                alert("Better luck next time!");
+                score = [];
+                wins = 0;
+                losses = 0;
+            }
+        });
+    });
 }
 
 game();
