@@ -5,11 +5,12 @@ function getComputerChoice () {
 }
 
 function playRound (playerSelection, computerSelection) {
-    const resultContainer = document.querySelector('.result-container');
+    const resultTextContainer = document.querySelector('.result-text');
     const result = document.querySelector('#result');
     if (result) {
         result.remove();
     }
+
     const resultText = document.createElement('h2');
     resultText.id = "result";
 
@@ -19,7 +20,7 @@ function playRound (playerSelection, computerSelection) {
         (playerSelection === "Scissors" && computerSelection === "Rock")
         ) {
             resultText.textContent = "You Lose! " + computerSelection + " beats " + playerSelection;
-            resultContainer.appendChild(resultText);
+            resultTextContainer.appendChild(resultText);
             return [0, 1];
     } else if (
         (playerSelection === "Rock" && computerSelection === "Scissors") ||  
@@ -27,41 +28,78 @@ function playRound (playerSelection, computerSelection) {
         (playerSelection === "Paper" && computerSelection === "Rock")
     ) {
             resultText.textContent = "You Win! " + playerSelection + " beats " + computerSelection;
-            resultContainer.appendChild(resultText);
+            resultTextContainer.appendChild(resultText);
             return [1, 0];
     } else {
         resultText.textContent = "Draw! " + playerSelection + " ties with " + computerSelection;
-        resultContainer.appendChild(resultText);
+        resultTextContainer.appendChild(resultText);
         return [0, 0];
     }
 }
 
 function game () {
     let score = [];
-    let wins = 0;
-    let losses = 0;
+    let player = 0;
+    let computer = 0;
     const buttons = document.querySelectorAll('button');
 
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
+            const scores = document.querySelectorAll('h4');
+            if (scores.length > 0) {
+                scores.forEach((score) => {
+                    score.remove();
+                })
+            }
+
+            const final = document.querySelector('#finalText');
+            if (final) {
+                final.remove();
+            }
+
             const computerSelection = getComputerChoice();
             const playerSelection = button.id;
             score = playRound(playerSelection, computerSelection); 
-            wins += score[0];
-            losses += score[1]; 
-            alert("Wins: " + wins + "\nLosses: " + losses);
+            player += score[0];
+            computer += score[1];
 
-            if (wins == 5) {
-                alert("Congratulations! You are the winner!");
+            const resultContainer = document.querySelector('.result-container');
+
+            const playerText = document.createElement('h4');
+            playerText.textContent = "Player";
+            const computerText = document.createElement('h4');
+            computerText.textContent = "Computer";
+            const playerScore = document.createElement('h4');
+            playerScore.textContent = player;
+            const computerScore = document.createElement('h4');
+            computerScore.textContent = computer;
+
+            resultContainer.appendChild(playerText);
+            resultContainer.appendChild(computerText);
+            resultContainer.appendChild(playerScore);
+            resultContainer.appendChild(computerScore);
+
+            if (player == 5) {
+                const finalTextContainer = document.querySelector('.final-text');
+                const finalText = document.createElement('h3');
+                finalText.id = "finalText";
+                finalText.textContent = "Congratulations! You are the winner!";
+                finalTextContainer.appendChild(finalText);
+
                 score = [];
-                wins = 0;
-                losses = 0;
+                player = 0;
+                computer = 0;
             }
-            if (losses == 5) {
-                alert("Better luck next time!");
+            if (computer == 5) {
+                const finalTextContainer = document.querySelector('.final-text');
+                const finalText = document.createElement('h3');
+                finalText.id = "finalText";
+                finalText.textContent = "Better luck next time!";
+                finalTextContainer.appendChild(finalText);
+
                 score = [];
-                wins = 0;
-                losses = 0;
+                player = 0;
+                computer = 0;
             }
         });
     });
