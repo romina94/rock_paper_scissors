@@ -15,8 +15,18 @@ body .rps-container {
 body .rps-container h2 {
   font-size: 2rem;
 }
+@media (max-width: 767px) {
+  body .rps-container h2 {
+    font-size: 1.5rem;
+  }
+}
 body .rps-container h1 {
   font-size: 3rem;
+}
+@media (max-width: 767px) {
+  body .rps-container h1 {
+    font-size: 2.5rem;
+  }
 }
 body .rps-container .game {
   display: flex;
