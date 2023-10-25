@@ -3,22 +3,13 @@
   src: url(fonts/Urbanist/static/Urbanist-Regular.ttf);
 }
 body {
-  color: #357162;
-  background-color: #040D12;
+  color: rgb(75, 84, 152);
   font-family: "Urbanist", sans-serif;
   margin: 0;
 }
 body .rps-container {
   text-align: center;
-  padding: 1% 8%;
-}
-body .rps-container h2 {
-  font-size: 2rem;
-}
-@media (max-width: 767px) {
-  body .rps-container h2 {
-    font-size: 1.5rem;
-  }
+  padding: 0 8%;
 }
 body .rps-container h1 {
   font-size: 3rem;
@@ -28,11 +19,19 @@ body .rps-container h1 {
     font-size: 2.5rem;
   }
 }
+body .rps-container h2 {
+  font-size: 2rem;
+}
+@media (max-width: 767px) {
+  body .rps-container h2 {
+    font-size: 1.5rem;
+  }
+}
 body .rps-container .game {
   display: flex;
   justify-content: center;
   gap: 30px;
-  padding: 2%;
+  padding: 2% 0 1%;
 }
 @media (max-width: 767px) {
   body .rps-container .game {
@@ -44,6 +43,7 @@ body .rps-container .game button {
   background-color: transparent;
 }
 body .rps-container .game button img {
+  width: 160px;
   transition: transform 0.6s ease;
 }
 body .rps-container .game button img:hover {
@@ -51,12 +51,18 @@ body .rps-container .game button img:hover {
 }
 @media (max-width: 767px) {
   body .rps-container .game button img {
-    width: 80%;
+    width: 100%;
   }
+}
+body .rps-container .choice-images.animate {
+  transition: 3s;
 }
 body .rps-container .result-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 50%;
   margin: auto;
+}
+body #finish-modal {
+  display: none;
 }/*# sourceMappingURL=index.css.map */

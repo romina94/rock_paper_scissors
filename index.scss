@@ -1,5 +1,4 @@
-$dark-green: #040D12;
-$light-green: #357162;
+$blue: rgb(75, 84, 152);
 
 $font-family: "Urbanist", sans-serif;
 
@@ -13,22 +12,13 @@ $screen-md-max: 1199px;
 }
 
 body {
-    color: $light-green;
-    background-color: $dark-green;
+    color: $blue;
     font-family: $font-family;
     margin: 0;
 
     .rps-container {
         text-align: center;
-        padding: 1% 8%;
-
-        h2 {
-            font-size: 2rem;
-
-            @media (max-width: $screen-xs-max) {
-                font-size: 1.5rem;
-            }
-        }
+        padding: 0 8%;
 
         h1 {
             font-size: 3rem;
@@ -38,11 +28,19 @@ body {
             }
         }
 
+        h2 {
+            font-size: 2rem;
+
+            @media (max-width: $screen-xs-max) {
+                font-size: 1.5rem;
+            }
+        }
+
         .game {
             display: flex;
             justify-content: center;
             gap: 30px;
-            padding: 2%;
+            padding: 2% 0 1%;
 
             @media (max-width: $screen-xs-max) {
                 gap: 5px;
@@ -53,15 +51,22 @@ body {
                 background-color: transparent;
 
                 img {
+                    width: 160px;
                     transition: transform 0.6s ease;
                     &:hover {
                         transform: scale(1.1);
                     }
 
                     @media (max-width: $screen-xs-max) {
-                        width: 80%;
+                        width: 100%;
                     }
                 }
+            }
+        }
+        
+        .choice-images {
+            &.animate {
+                transition: 3s;
             }
         }
 
@@ -71,5 +76,9 @@ body {
             width: 50%;
             margin: auto;
         }
+    }
+
+    #finish-modal {
+        display: none;
     }
 }
