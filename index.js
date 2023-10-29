@@ -12,8 +12,8 @@ const computerImg = document.getElementById('computerChoice');
 const resultContainer = document.querySelector('.result-container');
 const playerResult = document.getElementById('player-result');
 const computerResult = document.getElementById('computer-result');
-const finishModal = document.getElementById('finish-modal');
-const finishModalMessage = document.getElementById('finish-modal-message');
+const finishContainer = document.getElementById('finish-container');
+const finishMessage = document.getElementById('finish-message');
 const playAgain = document.getElementById('play-again');
 
 buttons.forEach((button) => {
@@ -23,9 +23,8 @@ buttons.forEach((button) => {
         score = playRound(playerSelection, computerSelection); 
         player += score[0];
         computer += score[1];
-
-        choiceImgs.style.display = "block";
-        choiceImgs.classList.add('animate');
+        
+        choiceImgs.style.display = "flex";
         playerImg.src = 'images/' + playerSelection + '.png';
         computerImg.src = 'images/' + computerSelection + '.png';
 
@@ -33,11 +32,12 @@ buttons.forEach((button) => {
         computerResult.textContent = computer;
 
         if (player == 5) {
-            finishModalMessage.textContent = "Congratulations! You are the winner!";
+            finishMessage.textContent = "Congratulations! You are the winner!";
+            document.body.classList.add('overlay');
         }
 
         if (computer == 5) {
-            finishModalMessage.textContent = "Better luck next time!";
+            finishMessage.textContent = "Better luck next time!";
         }
 
         if (player == 5 || computer == 5) {
@@ -52,7 +52,7 @@ buttons.forEach((button) => {
             resultContainer.style.display = "none";
             playerResult.textContent = player;
             computerResult.textContent = computer;
-            finishModal.style.display = "block";
+            finishContainer.style.display = "block";
         }
     });
 });
@@ -65,17 +65,17 @@ function getComputerChoice () {
 
 function playRound (playerSelection, computerSelection) {
     if (
-        (playerSelection === "Rock" && computerSelection === "Paper") ||  
-        (playerSelection === "Paper" && computerSelection === "Scissors") ||
-        (playerSelection === "Scissors" && computerSelection === "Rock")
+        (playerSelection === "rock" && computerSelection === "paper") ||  
+        (playerSelection === "paper" && computerSelection === "scissors") ||
+        (playerSelection === "scissors" && computerSelection === "rock")
         ) {
             resultTitle.textContent = "You lose!";
             resultDescription.textContent = computerSelection + " beats " + playerSelection;
             return [0, 1];
     } else if (
-        (playerSelection === "Rock" && computerSelection === "Scissors") ||  
-        (playerSelection === "Scissors" && computerSelection === "Paper") ||
-        (playerSelection === "Paper" && computerSelection === "Rock")
+        (playerSelection === "rock" && computerSelection === "scissors") ||  
+        (playerSelection === "scissors" && computerSelection === "paper") ||
+        (playerSelection === "paper" && computerSelection === "rock")
     ) {
             resultTitle.textContent = "You win!";
             resultDescription.textContent = playerSelection + " beats " + computerSelection;
@@ -94,5 +94,6 @@ playAgain.addEventListener('click', () => {
     resultDescription.textContent = "First to 5 wins!";
     resultDescription.style.display = "block";
     resultContainer.style.display = "grid";
-    finishModal.style.display = "none";
+    finishContainer.style.display = "none";
+    document.body.classList.remove('overlay');
 });

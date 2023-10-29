@@ -7,8 +7,14 @@ body {
   font-family: "Urbanist", sans-serif;
   margin: 0;
 }
+body.overlay {
+  background: url(images/firework.gif) no-repeat;
+  background-size: cover;
+}
 body .rps-container {
+  position: relative;
   text-align: center;
+  height: 100vh;
   padding: 0 8%;
 }
 body .rps-container h1 {
@@ -17,14 +23,6 @@ body .rps-container h1 {
 @media (max-width: 767px) {
   body .rps-container h1 {
     font-size: 2.5rem;
-  }
-}
-body .rps-container h2 {
-  font-size: 2rem;
-}
-@media (max-width: 767px) {
-  body .rps-container h2 {
-    font-size: 1.5rem;
   }
 }
 body .rps-container .game {
@@ -54,8 +52,28 @@ body .rps-container .game button img:hover {
     width: 100%;
   }
 }
-body .rps-container .choice-images.animate {
-  transition: 3s;
+body .rps-container h2 {
+  font-size: 2rem;
+}
+@media (max-width: 767px) {
+  body .rps-container h2 {
+    font-size: 1.5rem;
+  }
+}
+body .rps-container h3 {
+  text-transform: uppercase;
+}
+body .rps-container .choice-images {
+  justify-content: center;
+  gap: 10%;
+}
+body .rps-container .choice-images img {
+  width: 210px;
+}
+@media (max-width: 767px) {
+  body .rps-container .choice-images img {
+    width: 50%;
+  }
 }
 body .rps-container .result-container {
   display: grid;
@@ -63,6 +81,15 @@ body .rps-container .result-container {
   width: 50%;
   margin: auto;
 }
-body #finish-modal {
+@media (max-width: 767px) {
+  body .rps-container .result-container {
+    width: 100%;
+  }
+}
+body #finish-container {
   display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }/*# sourceMappingURL=index.css.map */

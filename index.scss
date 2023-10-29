@@ -16,8 +16,15 @@ body {
     font-family: $font-family;
     margin: 0;
 
+    &.overlay {
+        background: url(images/firework.gif) no-repeat;
+        background-size: cover;
+    }
+
     .rps-container {
+        position: relative;
         text-align: center;
+        height: 100vh;
         padding: 0 8%;
 
         h1 {
@@ -25,14 +32,6 @@ body {
 
             @media (max-width: $screen-xs-max) {
                 font-size: 2.5rem;
-            }
-        }
-
-        h2 {
-            font-size: 2rem;
-
-            @media (max-width: $screen-xs-max) {
-                font-size: 1.5rem;
             }
         }
 
@@ -53,6 +52,7 @@ body {
                 img {
                     width: 160px;
                     transition: transform 0.6s ease;
+
                     &:hover {
                         transform: scale(1.1);
                     }
@@ -63,10 +63,29 @@ body {
                 }
             }
         }
-        
+
+        h2 {
+            font-size: 2rem;
+
+            @media (max-width: $screen-xs-max) {
+                font-size: 1.5rem;
+            }
+        }
+
+        h3 {
+            text-transform: uppercase;
+        }
+
         .choice-images {
-            &.animate {
-                transition: 3s;
+            justify-content: center;
+            gap: 10%;
+
+            img {
+                width: 210px;
+
+                @media (max-width: $screen-xs-max) {
+                    width: 50%;
+                }
             }
         }
 
@@ -75,10 +94,18 @@ body {
             grid-template-columns: 1fr 1fr;
             width: 50%;
             margin: auto;
+
+            @media (max-width: $screen-xs-max) {
+                width: 100%;
+            }
         }
     }
 
-    #finish-modal {
+    #finish-container {
         display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
